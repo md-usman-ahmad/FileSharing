@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <%- include('shared/BspCssJqueryLinks') %>
+  </head>
+
+  <body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-lg-8 bg-white p-4  rounded shadow-sm">
+          <div class="row justify-content-center">
+            <div class="col-3 mb-1 ">
+                <h2 class="h3">Login</h2>
+                <!-- <h3 class="fs-6 fw-normal text-secondary m-0">Enter your details to Signup</h3> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+                <form action="#!">
+                    <div class="col-12 pb-3">
+                        <label for="email" class="form-label">Email </label>
+                        <input type="text" class="form-control" name="email" id="loginEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="col-12 pb-3">
+                        <label for="password" class="form-label">Password </label>
+                        <input type="text" class="form-control" name="password" id="loginPassword" value="" required>
+                    </div>      
+                    <div class="col-sm-12 mt-3">
+                        <div class="d-grid">
+                            <button type="submit" id="loginConfirm" class="btn btn-primary" >Login</button>
+                        </div>
+                    </div>                  
+                    </div>
+                </form>
+            </div>
+            <div class="row justify-content-center mt-2">          
+                <div class="text-success text-center pt-2" id="loginSuccessMessage">
+
+                </div>
+                <div class="text-danger text-center"  id="loginErrorMessage">
+
+                </div>              
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('shared/BspJsAxiosLinks') %>    
+    <!-- this.ejs js-file  -->
+    <script src="/login.js"></script>
+  </body>
+</html>

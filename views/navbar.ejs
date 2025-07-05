@@ -1,0 +1,18 @@
+<div class="container-fluid px-4  bg-dark">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom  ">
+            <div class="col-md-3 mb-2 mb-md-0"> <a href="/"
+                    class="d-inline-flex link-body-emphasis text-decoration-none text-white"  style="pointer-events: none; cursor: default;"> FileSharing</a></div>
+            <div class="col-md-3 text-end">
+
+                <% if(isLoggedIn){  %>
+                    <button type="button" class="btn btn-outline-danger" id="logoutbtn" >Logout</button>               
+                <% } else{ %>
+                    <a href="http://localhost:8000/login"><button type="button" class="btn btn-outline-secondary"  id="loginbtn">Login</button></a>
+                <a href="http://localhost:8000/signup"><button type="button" class="btn btn-outline-info"  id="signupbtn">Sign-up</button></a>    
+                <% } %>
+                
+                
+            </div>
+        </header>
+    </div>

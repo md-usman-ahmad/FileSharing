@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <%- include('shared/BspCssJqueryLinks') %>
+  </head>
+
+  <body>
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-lg-8 bg-white p-4  rounded shadow-sm">
+          <div class="row justify-content-center">
+            <div class="col-3 mb-1 ">
+                <h2 class="h3">Sign up</h2>
+                <!-- <h3 class="fs-6 fw-normal text-secondary m-0">Enter your details to Signup</h3> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+                <form action="#!">
+                    <div class="row  gy-md-3 overflow-hidden">
+                      <div class="col-12">
+                          <label for="firstName" class="form-label">First Name </label>
+                          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" required>
+                      </div>
+                      <div class="col-12">
+                          <label for="lastName" class="form-label">Last Name </label>
+                          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name" required>
+                      </div>
+                      <div class="col-12">
+                              <label for="Age" class="form-label">Age</label>
+                              <input type="text" class="form-control" id="Age" placeholder="Enter Age" name="Age" required>
+                      </div>
+                      <div class="col-12">
+                          <label for="email" class="form-label">Email </label>
+                          <input type="text" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                      </div>
+                      <div class="col-12">
+                          <label for="password" class="form-label">Password </label>
+                          <input type="text" class="form-control" name="password" id="password" value="" required>
+                      </div>                      
+                    </div>
+                </form>
+            </div>
+          </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-sm-4 d-grid">
+                        <button type="submit" id="SignupConfirm" class="btn btn-primary" >Sign up</button>
+                </div>  
+                <div class="text-success text-center pt-2" id="signupSuccessMessage">
+
+                </div>
+                <div class="text-danger text-center"  id="signupErrorMessage">
+
+                </div>
+            </div>
+          <div class="row">
+              <!-- <hr class="mt-2 mb-4 border-secondary-subtle"> -->
+              <div class="col-12">
+                <p class="m-0 text-secondary text-center">Already have an account? <a href="http://localhost:8000/login" class="link-primary text-decoration-none">Login</a></p>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%- include('shared/BspJsAxiosLinks') %>
+
+    <!-- signup.ejs js-file  -->
+    <script src="/signup.js"></script>
+  </body>
+</html>

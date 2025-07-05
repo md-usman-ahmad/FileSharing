@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Files Sent</title>
+  <%- include('shared/BspCssJqueryLinks'); %>
+  <style>
+    .user-select-all {
+      user-select: all;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Upload file Section  -->
+  <div class="container">
+    <div class="row pt-3  border-bottom">
+      <div class="col-sm-8">
+        <div>
+            <h2>Total files sent by you</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row pt-3" >
+        <div class="col-sm-1">
+            <section id="displaysection" >
+                    <% arr_fileid.forEach(function(item){ %>
+                    <h5> <%= item.sendfileid %> </h5> 
+                    <% }) %>
+            </section>
+        </div>
+        <div class="col-sm-4">
+          <section id="displaysection" >
+                    <% arr_filenames.forEach(function(item){ %>
+                    <h5> <%= item.filename %> </h5>     
+                    <% }) %>
+            </section>
+        </div>
+        <div class="col-sm-3">
+          <section id="displaysection" >
+                    <% arr_receivernames.forEach(function(item){ %>
+                    <h5> <%= item.firstname %> </h5> 
+                    <% }) %>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- <div class="row pt-3">
+      <div class="col-sm-12">
+        <div class="form-control d-flex">
+          <label for="" class="mt-1 pe-4" >Link : </label>
+          <div><a href="#" id="anchortag" class="user-select-all px-3">   </a></div>        
+          <button type="button" class="ms-auto btn btn-outline-primary copylinkbtn">Copy Link <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard " viewBox="0 0 16 16">
+              <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+            </svg>
+          </button>
+          <a href="" id="downloadbtn"><button type="button" class="btn downloadbtn">Download</button></a>
+        </div>
+      </div>
+    </div> -->
+    
+  </div>
+
+
+
+  <%- include('shared/BspJsAxiosLinks'); %>
+  <!-- home.ejs js-file  -->
+  <script src="/home.js"></script>
+</body>
+
+</html>
