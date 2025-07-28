@@ -29,6 +29,73 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require('express-fileupload');
 app.use(cookieParser());
 
+let connection, query, arr, outputFromDB,payload;
+const passport = require("passport");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+// Configure Passport to use Google OAuth
+passport.use(new GoogleStrategy({
+  clientID: "1088548227866-crip94rqn4hb331e0gsj040eo0k06o1p.apps.googleusercontent.com",
+  clientSecret: "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",
+  callbackURL: "http://localhost:8000/google/callback"
+}, async function(accessToken, refreshToken, profile, cb){
+  console.log("profile =",profile);
+  try {
+    connection = await dbConnection();
+    const outputFromDB = await dbQuery(connection,`SELECT * FROM users WHERE email = ?`, [
+      profile.emails[0].value,
+    ]);
+    console.log("outputFromDB =",outputFromDB);
+
+    if (outputFromDB[0].length > 0) {  
+      cb(null, outputFromDB[0][0]);
+    } else {
+      await dbQuery(connection,`INSERT INTO users (firstname, lastname,email,provider) VALUES (?, ?, ?, ?)`, [
+        profile.name.givenName, profile.name.familyName, profile.emails[0].value, profile.provider
+      ]);
+      const outputFromDB = await dbQuery(connection,`SELECT * FROM users WHERE email = ?`, [
+        profile.emails[0].value,
+      ]);
+      cb(null, outputFromDB[0][0]);
+    }
+
+  } catch (error) {
+    cb(error,false);
+  }
+}))
+
+// Intiliazing passport as middleware in our application
+app.use(passport.initialize());
+
+// after clicking on 'continue with Google' button 
+app.get("/google", passport.authenticate('google', {
+  scope: ['profile', 'email'],
+  prompt: 'select_account'  // force Google to show account picker every time
+}));
+
+app.get("/google/callback",passport.authenticate("google",{
+  session : false
+}), async function(request,response,next){
+    console.log("request.user =",request.user);
+    const user = request.user;
+    const token = jwt.sign({ userid: user.userid }, SECRET, {
+      expiresIn: '1h'
+    })
+
+  response.cookie('token', token)
+
+//   response.send('callback is working')
+  response.redirect("http://localhost:8000/home");
+})
+
+
+
+
+
+
+
+
+
 app.use(fileUpload({
     limits: {
         fileSize: 10 * 1024 * 1024,
@@ -37,8 +104,6 @@ app.use(fileUpload({
     // abortOnLimit: true, // agr file size limit s zyada to yhi se response=error seedha .catch me jayga route tk pohchega hi niii because its middleware.
     createParentPath: true
 }))
-
-let connection, query, arr, outputFromDB,payload;
 
 
 app.get("/upload",function(request,response){
