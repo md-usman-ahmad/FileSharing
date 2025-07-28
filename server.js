@@ -6,6 +6,9 @@ app.listen(PORT, function () {
 })
 
 
+require("dotenv").config();
+// console.log("process.env = ",process.env);
+
 let bodyparser = require('body-parser');
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }))
@@ -35,8 +38,8 @@ const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // Configure Passport to use Google OAuth
 passport.use(new GoogleStrategy({
-  clientID: "1088548227866-crip94rqn4hb331e0gsj040eo0k06o1p.apps.googleusercontent.com",
-  clientSecret: "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",
+  clientID: process.env.GOOGLE_CLIENTID,
+  clientSecret: process.env.GOOGLE_CLIENTSECRET,
   callbackURL: "http://localhost:8000/google/callback"
 }, async function(accessToken, refreshToken, profile, cb){
   console.log("profile =",profile);
@@ -91,15 +94,15 @@ app.get("/google/callback",passport.authenticate("google",{
 const GithubStrategy = require('passport-github').Strategy;
 // Configure Passport to use Github OAuth
 passport.use(new GithubStrategy({
-  clientID: "Ov23li2z5voJyyuUxvlB",
-  clientSecret: "5aa9240602ffad46847c102b4fbcadb896b2bd2e",
+  clientID: process.env.GITHUB_CLIENTID,
+  clientSecret: process.env.GITHUB_CLIENTSECRET,
   callbackURL: "http://localhost:8000/github/callback"
 }, async function(accessToken, refreshToken, profile, cb){
   console.log("profile =",profile);
   try {
     connection = await dbConnection();
     const outputFromDB = await dbQuery(connection,`SELECT * FROM users WHERE email = ?`, [
-      profile.username,
+      profile.username+"@gmail.com",
     ]);
     console.log("outputFromDB =",outputFromDB);
 
