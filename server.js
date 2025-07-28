@@ -31,8 +31,8 @@ app.use(cookieParser());
 
 let connection, query, arr, outputFromDB,payload;
 const passport = require("passport");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // Configure Passport to use Google OAuth
 passport.use(new GoogleStrategy({
   clientID: "1088548227866-crip94rqn4hb331e0gsj040eo0k06o1p.apps.googleusercontent.com",
@@ -88,12 +88,60 @@ app.get("/google/callback",passport.authenticate("google",{
   response.redirect("http://localhost:8000/home");
 })
 
+const GithubStrategy = require('passport-github').Strategy;
+// Configure Passport to use Github OAuth
+passport.use(new GithubStrategy({
+  clientID: "Ov23li2z5voJyyuUxvlB",
+  clientSecret: "5aa9240602ffad46847c102b4fbcadb896b2bd2e",
+  callbackURL: "http://localhost:8000/github/callback"
+}, async function(accessToken, refreshToken, profile, cb){
+  console.log("profile =",profile);
+  try {
+    connection = await dbConnection();
+    const outputFromDB = await dbQuery(connection,`SELECT * FROM users WHERE email = ?`, [
+      profile.username,
+    ]);
+    console.log("outputFromDB =",outputFromDB);
 
+    if (outputFromDB[0].length > 0) {  
+      cb(null, outputFromDB[0][0]);
+    } else {
+      await dbQuery(connection,`INSERT INTO users (firstname, lastname,email,provider) VALUES (?, ?, ?, ?)`, [
+        profile.displayName, profile.displayName, profile.username+"@gmail.com", profile.provider
+      ]);
+      const outputFromDB = await dbQuery(connection,`SELECT * FROM users WHERE email = ?`, [
+        profile.username+"@gmail.com",
+      ]);
+      cb(null, outputFromDB[0][0]);
+    }
 
+  } catch (error) {
+    cb(error,false);
+  }
+}))
 
+// Intiliazing passport as middleware in our application
+app.use(passport.initialize());
 
+// after clicking on 'continue with Google' button 
+app.get("/github", passport.authenticate('github', {
+  scope: ['profile'],
+}));
 
+app.get("/github/callback",passport.authenticate("github",{
+  session : false
+}), async function(request,response,next){
+    console.log("request.user =",request.user);
+    const user = request.user;
+    const token = jwt.sign({ userid: user.userid },SECRET, {
+      expiresIn: '1h'
+    })
 
+  response.cookie('token', token)
+
+//   response.send('callback is working')
+  response.redirect("http://localhost:8000/home");
+})
 
 
 app.use(fileUpload({
@@ -104,7 +152,6 @@ app.use(fileUpload({
     // abortOnLimit: true, // agr file size limit s zyada to yhi se response=error seedha .catch me jayga route tk pohchega hi niii because its middleware.
     createParentPath: true
 }))
-
 
 app.get("/upload",function(request,response){
     response.render("upload.ejs");
