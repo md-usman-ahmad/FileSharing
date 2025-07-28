@@ -27,21 +27,24 @@
 
     <div class="row pt-3" >
         <div class="col-sm-1">
-            <section id="displaysection" >
+          <h5>File id</h5>
+            <section id="displaysection" class="form-control" >
                     <% arr_fileid.forEach(function(item){ %>
                     <h5> <%= item.sendfileid %> </h5> 
                     <% }) %>
             </section>
         </div>
         <div class="col-sm-4">
-          <section id="displaysection" >
+          <h5>File name</h5>
+          <section id="displaysection" class="form-control" >
                     <% arr_filenames.forEach(function(item){ %>
                     <h5> <%= item.filename %> </h5>     
                     <% }) %>
             </section>
         </div>
         <div class="col-sm-3">
-          <section id="displaysection" >
+          <h5>send to</h5>
+          <section id="displaysection" class="form-control" >
                     <% arr_receivernames.forEach(function(item){ %>
                     <h5> <%= item.firstname %> </h5> 
                     <% }) %>

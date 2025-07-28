@@ -10,7 +10,7 @@
   <body>
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-sm-12 col-lg-8 bg-white p-4  rounded shadow-sm">
+      <div class="col-sm-12 col-lg-8  p-4  rounded shadow-sm" style=" box-shadow: 2px 2px 10px rgb(133, 133, 133) !important;" >
           <div class="row justify-content-center">
             <div class="col-3 mb-1 ">
                 <h2 class="h3">Login</h2>
@@ -32,7 +32,10 @@
                         <div class="d-grid">
                             <button type="submit" id="loginConfirm" class="btn btn-primary" >Login</button>
                         </div>
-                    </div>                  
+                    </div>         
+                    <div>
+                      <p class="m-0 text-secondary text-center "><a class="link-primary text-decoration-none" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#forgotPassword">ForgotPassword?</a></p>
+                    </div>
                     </div>
                 </form>
             </div>
@@ -48,6 +51,57 @@
       </div>
     </div>
   </div>
+
+
+    <!-- FORGOT Password Modal  -->
+  <div class="modal fade" id="forgotPassword" tabindex="-1" aria-labelledby="exampleModalLabel"         aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Did you forgot your Password?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-12">
+              <label for="email" class="form-label">email </label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="Type here" required>
+          </div>
+          <div class="col-12">
+              <label class="form-label">Enter new Password </label>
+              <input type="text" class="form-control" name="enp" id="enp" placeholder="type here" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row justify-content-center mt-2">          
+              <div class="text-success text-center pt-2" id="enpSuccessMessage">
+
+              </div>
+              <div class="text-danger text-center"  id="enpErrorMessage">
+
+              </div>              
+              </div>
+          <button type="button" class="newPasswordConfirm btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- TOAST -->
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <!-- <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Bootstrap</strong>
+                    <small class="text-body-secondary">11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div> -->
+                  <div class="toast-body main" >
+                    
+                  </div>
+                </div>
+            </div>
+
 
   <%- include('shared/BspJsAxiosLinks') %>    
     <!-- this.ejs js-file  -->

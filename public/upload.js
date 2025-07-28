@@ -38,7 +38,7 @@ function uploadFile(event) {
         $("#anchortag").html(response.data.downloadUrl);
         $("#downloadbtn").attr("href",response.data.downloadUrl);
         $("#anchortag").addClass("form-control");
-        alert("File uploaded into database && documents-table(2nd)")
+        alert("File uploaded into database && documents-table(2nd)");
         location.reload();
     })
     .catch(function(error){

@@ -48,6 +48,7 @@ app.get("/upload",function(request,response){
 app.post('/upload',async function (request, response) {
     try {
         console.log("request.files = ",request.files);
+        console.log("request.body = ",request.body);
         if(request.files){
             const uploadingFileOnServer = request.files.foo;
             if(uploadingFileOnServer.truncated === false){
@@ -161,6 +162,30 @@ app.post("/login", async function (request, response) {
                 message: "Kindly fill in all the credentials listed above."
             }
         }
+
+    } catch (error) {
+        response.status(500).send(error);
+    }
+})
+
+app.patch("/forgotpassword", async function(request,response){
+    try {
+        const {email,newPassword} = request.body;
+        connection = await dbConnection();
+        let query = `select * from users where email = ?`
+        let arr= [email];
+        let PasswordUpdateWalaUser = await dbQuery(connection,query,arr);
+        console.log("PasswordUpdateWalaUser =",PasswordUpdateWalaUser);
+        if(PasswordUpdateWalaUser[0].length === 0){
+            throw "Authentication Failed!!! This user doesn't exist in our database"
+        }
+        query = `update users
+                set password = ?
+                where email = ?
+                `
+        arr = [bcrypt.hashSync(newPassword,SALTROUNDS),email];
+        await dbQuery(connection,query,arr);
+        response.send(`Password updated Successfully of a user having email(${email})`);
 
     } catch (error) {
         response.status(500).send(error);

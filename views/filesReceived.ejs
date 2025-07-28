@@ -40,7 +40,9 @@
                     <% arr_filenames.forEach(function(item){ %>
                         <div class="d-flex align-items-center justify-content-between pb-2">
                             <h5 class="border-bottom "> <%= item.filename %> </h5>     
-                            <a href="http://localhost:8000/download?fileName=<%= item.filename %>" id="downloadbtn"><button type="button" class="btn btn-outline-primary downloadbtn ">Download</button></a>
+                            <a href="http://localhost:8000/download?fileName=<%= item.filename %>" id="downloadbtn">
+                              <button type="button" class="btn btn-outline-primary downloadbtn ">Download</button>
+                            </a>
                         </div>
                     <% }) %>
             </section>
