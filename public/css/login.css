@@ -1,0 +1,30 @@
+/* Continue with google/github button css */
+.google-btn , .github-btn  {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    color: #333333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.google-btn img , .github-btn img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.google-btn:hover , .github-btn:hover {
+    background-color: #f1f1f1;
+    transform: translateX(+20px);
+    box-shadow: 10px 6px 10px rgb(16, 228, 200);
+}
+
+.google-btn:active , .github-btn:active {
+  transform: scale(0.80);
+  box-shadow: 10px 12px 5px rgba(7, 7, 7, 0.993);
+}

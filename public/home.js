@@ -32,7 +32,7 @@ $(".sendBtn").on("click",function(event){
                 htmlstr += `        
                 <div class="d-flex " >  
                     <p>${item.email}</p>
-                    <img src="add.png" alt="" width="30px" height="30px" id=${item.userid} class="ms-auto plus">
+                    <img src="/images/add.png" alt="" width="30px" height="30px" id=${item.userid} class="ms-auto plus">
                 </div>
                 `
             })

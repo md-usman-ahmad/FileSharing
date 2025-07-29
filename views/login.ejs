@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <%- include('shared/BspCssJqueryLinks') %>
+    <link rel="stylesheet" href="/css/login.css">
+
   </head>
 
   <body>
@@ -32,20 +34,28 @@
                         <div class="d-grid">
                             <button type="submit" id="loginConfirm" class="btn btn-primary" >Login</button>
                         </div>
-                    </div>         
-                    <div>
-                      
-                      <!-- if server.js pe passport.js ka pura code likhrhe ho to  -->
-                <a href="http://localhost:8000/google"> Continue with Google</a>
-                <a href="http://localhost:8000/github"> Continue with Github</a>
-
-                <!-- if passport-config.js pe passport ko configure krrhe to   -->
-                <!-- <a href="http://localhost:8000/login/google"> Continue with Google</a>
-                <a href="http://localhost:8000/login/github"> Continue with Github</a> -->
-                      <p class="m-0 text-secondary text-center "><a class="link-primary text-decoration-none" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#forgotPassword">ForgotPassword?</a></p>
-                    </div>
-                    </div>
+                    </div>              
                 </form>
+                <div class="col-sm-12 mt-3"> 
+                        <!-- if server.js pe passport.js ka pura code likhrhe ho to  -->
+                      <a href="http://localhost:8000/google">
+                        <button class="google-btn me-2">
+                          <img src="/images/google.png" alt="Google logo" width="30px" height="30px">
+                            <span>Continue with Google</span>
+                        </button> 
+                      </a>
+                      <a href="http://localhost:8000/github">
+                        <button class="github-btn">
+                          <img src="/images/github.png" alt="Github logo" width="30px" height="30px">
+                            <span>Continue with Github</span>
+                        </button> 
+                      </a>
+
+                  <!-- if passport-config.js pe passport ko configure krrhe to   -->
+                  <!-- <a href="http://localhost:8000/login/google"> Continue with Google</a>
+                  <a href="http://localhost:8000/login/github"> Continue with Github</a> -->
+                        <p class="m-0 text-secondary text-center "><a class="link-primary text-decoration-none" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#forgotPassword">ForgotPassword?</a></p>
+                </div>
             </div>
             <div class="row justify-content-center mt-2">          
                 <div class="text-success text-center pt-2" id="loginSuccessMessage">
